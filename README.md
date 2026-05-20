@@ -1,2 +1,2 @@
 # qa_automate
-homeWork
+HomeWork
