@@ -1,0 +1,22 @@
+{
+  "name": "homework3",
+  "version": "1.0.0",
+  "description": "home work 3 (node js)",
+  "main": "main.js",
+  "scripts": {
+    "test": "node fs_extra.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuryZabenko/qa_automate.git"
+  },
+  "author": "Yury Zabenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YuryZabenko/qa_automate/issues"
+  },
+  "homepage": "https://github.com/YuryZabenko/qa_automate#readme",
+  "dependencies": {
+    "fs-extra": "^11.3.5"
+  }
+}
