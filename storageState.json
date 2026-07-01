@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://demo.playwright.dev",
+      "localStorage": [
+        {
+          "name": "react-todos",
+          "value": "[{\"id\":\"1c70304d-ddd0-491e-8fde-0a3a3b89fb31\",\"title\":\"Persistent task 1\",\"completed\":true},{\"id\":\"f9680573-b8ed-41ff-836b-f85001db67b3\",\"title\":\"Persistent task 2\",\"completed\":false}]"
+        }
+      ]
+    }
+  ]
+}
