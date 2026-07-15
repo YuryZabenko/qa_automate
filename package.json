@@ -1,0 +1,29 @@
+{
+  "name": "qa_automate",
+  "version": "1.0.0",
+  "description": "Work",
+  "main": "main.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test update": "npx playwright test --update-snapshots",
+    "test head": "npx playwright test --headed",
+    "test ui": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuryZabenko/qa_automate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/YuryZabenko/qa_automate/issues"
+  },
+  "homepage": "https://github.com/YuryZabenko/qa_automate#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1"
+  }
+}
