@@ -6,12 +6,12 @@ test.describe('tests for todomvc app', async () => {
   })
 
   test.describe('desktop tests', async () => {
-    test('should visible general elements app', async ({ page }) => {
+    test('Task 1 - should visible general elements app', async ({ page }) => {
       await expect(page.getByRole('heading', {name: 'todos'})).toBeVisible;
       await expect(page.getByPlaceholder('What needs to be done?')).toBeVisible();
     });
 
-    test('should create three active task', async ({ page }) => {
+    test('Task 2 - should create three active task', async ({ page }) => {
       await page.getByPlaceholder('What needs to be done?').fill('Learn Playwright');
       await page.keyboard.press('Enter');
 
@@ -28,7 +28,7 @@ test.describe('tests for todomvc app', async () => {
       await expect(page.getByTestId('todo-item').nth(2)).toHaveText('Review homework');
     });
 
-    test('should check the completion of the task and the operation of the filters', async ({page}) => {
+    test('Task 3 - should check the completion of the task and the operation of the filters', async ({page}) => {
       await page.getByPlaceholder('What needs to be done?').fill('task1');
       await page.keyboard.press('Enter');
 
@@ -56,20 +56,43 @@ test.describe('tests for todomvc app', async () => {
       await expect(page.getByTestId('todo-item')).toHaveCount(3);
     })
 
-    test('should edit the task and the updated value should be displayed in the list.', async ({page}) => {
+    test('Task 4 - should edit the task and the updated value should be displayed in the list.', async ({page}) => {
       await page.getByPlaceholder('What needs to be done?').fill('Old task name');
       await page.keyboard.press('Enter');
 
       await page.getByTestId('todo-title').dblclick();
-      await page.keyboard.press('Control+A');
-      await page.getByTestId('todo-title').pressSequentially('Updated task name');
+      await page.getByLabel('Edit').fill('Updated task name');
       await page.keyboard.press('Enter');
 
       await expect(await page.getByTestId('todo-title')).not.toHaveText('Old task name');
       await expect(await page.getByTestId('todo-title')).toHaveText('Updated task name');
     })
 
-    test('After the page is reloaded, the tasks and their statuses should be saved.', async ({page, browser}) => {
+    test('Task 5',  async ({page}) => {
+      await page.getByPlaceholder('What needs to be done?').fill('Todo task 1');
+      await page.keyboard.press('Enter');
+
+      await page.getByPlaceholder('What needs to be done?').fill('Todo task 2');
+      await page.keyboard.press('Enter');
+
+      await page.getByPlaceholder('What needs to be done?').fill('Todo task 3');
+      await page.keyboard.press('Enter');
+
+      await page.getByTestId('todo-item').first().click();
+      await page.getByLabel('Delete').first().click();
+      await expect(page.getByTestId('todo-item')).toHaveCount(2);
+
+      await page.getByLabel('Toggle Todo').nth(0).check();
+      await expect(page.getByLabel('Toggle Todo').nth(0)).toBeChecked();
+
+      await page.locator('.clear-completed').click();
+      await expect(page.getByText('Todo task 2')).toBeHidden();
+
+      await expect(page.getByTestId('todo-item')).toHaveCount(1);
+
+    })
+
+    test('Task 6 - After the page is reloaded, the tasks and their statuses should be saved.', async ({page, browser}) => {
       await page.getByPlaceholder('What needs to be done?').fill('Persistent task 1');
       await page.keyboard.press('Enter');
 
@@ -93,7 +116,7 @@ test.describe('tests for todomvc app', async () => {
       await expect(newPage.getByText('Persistent task 2')).toBeVisible();
     })
 
-    test('should compare the current state of the interface with the reference screenshot', async ({page}) => {
+    test('Task 7 - should compare the current state of the interface with the reference screenshot', async ({page}) => {
       await page.getByPlaceholder('What needs to be done?').fill('task 1');
       await page.keyboard.press('Enter');
 
@@ -111,7 +134,7 @@ test.describe('tests for todomvc app', async () => {
 
     test.use({viewport: {width: 390, height: 844}})
 
-    test('should compare the current state of the mobile interface with the reference screenshot', async ({page}) => {
+    test('Task * - should compare the current state of the mobile interface with the reference screenshot', async ({page}) => {
       await page.getByPlaceholder('What needs to be done?').fill('task 1');
       await page.keyboard.press('Enter');
 

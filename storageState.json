@@ -6,7 +6,7 @@
       "localStorage": [
         {
           "name": "react-todos",
-          "value": "[{\"id\":\"1c70304d-ddd0-491e-8fde-0a3a3b89fb31\",\"title\":\"Persistent task 1\",\"completed\":true},{\"id\":\"f9680573-b8ed-41ff-836b-f85001db67b3\",\"title\":\"Persistent task 2\",\"completed\":false}]"
+          "value": "[{\"id\":\"4c23c041-5278-4e2b-be38-36b62204c2a7\",\"title\":\"Persistent task 1\",\"completed\":true},{\"id\":\"cbd53f8a-7083-4445-a595-44a9316665db\",\"title\":\"Persistent task 2\",\"completed\":false}]"
         }
       ]
     }
