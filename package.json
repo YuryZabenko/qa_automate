@@ -1,0 +1,28 @@
+{
+  "name": "qa_automate",
+  "version": "1.0.0",
+  "description": "Work",
+  "main": "main.js",
+  "scripts": {
+    "tests": "npx playwright test",
+    "tests:headed": "npx playwright test --headed",
+    "allure:generate": "npx allure generate allure-results --clean",
+    "allure:open": "npx allure open allure-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuryZabenko/qa_automate.git"
+  },
+  "keywords": [],
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/YuryZabenko/qa_automate/issues"
+  },
+  "homepage": "https://github.com/YuryZabenko/qa_automate#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2"
+  }
+}
