@@ -27,7 +27,7 @@ export class BasePage {
    */
   async getTitle() {
     return await test.step('Get tittle of page', async () => {
-      await this.page.waitForLoadState({ state: 'networkidle' });
+      await this.page.waitForLoadState('networkidle');
       return await this.page.title();
     });
   }
@@ -47,6 +47,6 @@ export class BasePage {
    * @returns {Promise<void>}
    */
   async waitLoad() {
-    await this.page.waitForLoadState({ state: 'networkidle' });
+    await this.page.waitForLoadState('networkidle');
   }
 }

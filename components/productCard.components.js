@@ -80,7 +80,7 @@ export class ProductCardComponents {
   async changeQuantity(quantity) {
     await test.step('Change product quantity', async () => {
       await this.quantity.fill(quantity);
-      await this.page.waitForLoadState({ state: 'networkidle' });
+      await this.page.waitForLoadState('networkidle');
     });
   }
 
