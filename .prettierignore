@@ -1,0 +1,8 @@
+node_modules/
+allure-report/
+allure-results/
+playwright-report/
+test-results/
+.github/
+.idea/
+package-lock.json
