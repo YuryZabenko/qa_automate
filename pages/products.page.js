@@ -1,9 +1,9 @@
-import {BasePage} from "./base.page.js";
-import {CategoryComponents} from "../components/category.components.js";
-import {ProductsComponents} from "../components/products.components.js";
-import {ModalComponents} from "../components/modal.components.js";
-import {ProductCardComponents} from "../components/productCard.components.js";
-import {test} from "@playwright/test";
+import { BasePage } from './base.page.js';
+import { CategoryComponents } from '../components/category.components.js';
+import { ProductsComponents } from '../components/products.components.js';
+import { ModalComponents } from '../components/modal.components.js';
+import { ProductCardComponents } from '../components/productCard.components.js';
+import { test } from '@playwright/test';
 
 export class ProductsPage extends BasePage {
   constructor(page) {
@@ -16,8 +16,8 @@ export class ProductsPage extends BasePage {
     this.category = new CategoryComponents(page);
 
     this.saleBanner = page.locator('img#sale_image');
-    this.searchInput = page.locator(`input#search_product`);
-    this.searchButton = page.locator(`button#submit_search`);
+    this.searchInput = page.locator('input#search_product');
+    this.searchButton = page.locator('button#submit_search');
   }
 
   /**
@@ -26,9 +26,9 @@ export class ProductsPage extends BasePage {
    * @returns {Promise<void>}
    */
   async searchProducts(text) {
-    await test.step(`Search product`, async () => {
+    await test.step('Search product', async () => {
       await this.searchInput.fill(text);
       await this.searchButton.click();
-    })
+    });
   }
 }

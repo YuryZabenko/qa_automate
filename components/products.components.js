@@ -1,15 +1,15 @@
-import {test} from "@playwright/test";
+import { test } from '@playwright/test';
 
 export class ProductsComponents {
   constructor(page) {
     this.page = page;
 
-    this.products = page.locator(`//*[@class='product-image-wrapper']`);
-    this.addToCartButton = page.locator(`//*[@class='btn btn-default add-to-cart']`);
-    this.viewProductButton = page.getByRole('link', {name: 'View Product'});
+    this.products = page.locator('//*[@class="product-image-wrapper"]');
+    this.addToCartButton = page.locator('//*[@class="btn btn-default add-to-cart"]');
+    this.viewProductButton = page.getByRole('link', { name: 'View Product' });
 
     this.productPrice = page.locator('//div[contains(@class, "productinfo")]//h2');
-    this.productName = page.locator('//div[contains(@class, "productinfo")]//p')
+    this.productName = page.locator('//div[contains(@class, "productinfo")]//p');
 
     this.titleTextLocator = page.locator('.title.text-center');
     this.titleText = 'All Products';
@@ -23,7 +23,7 @@ export class ProductsComponents {
   async viewProduct(position) {
     await test.step(`Click to view product № ${position}`, async () => {
       await this.viewProductButton.nth(position - 1).click();
-    })
+    });
   }
 
   /**
@@ -34,9 +34,9 @@ export class ProductsComponents {
   async addToCart(position) {
     await test.step(`Add product № ${position} to cart`, async () => {
       await this.products.nth(position - 1).hover();
-      await this.addToCartButton.nth(position).waitFor({state: 'visible'})
+      await this.addToCartButton.nth(position).waitFor({ state: 'visible' });
       await this.addToCartButton.nth(position).click();
-    })
+    });
   }
 
   /**
@@ -48,7 +48,7 @@ export class ProductsComponents {
     return await test.step(`Get price of product № ${position}`, async () => {
       const priceText = await this.productPrice.nth(position - 1).textContent();
       return parseInt(priceText.replace(/[^0-9]/g, ''));
-    })
+    });
   }
 
   /**
@@ -59,7 +59,7 @@ export class ProductsComponents {
   async getProductName(position) {
     return await test.step(`Get name of product № ${position}`, async () => {
       return await this.productName.nth(position - 1).textContent();
-    })
+    });
   }
 
   /**
@@ -71,8 +71,8 @@ export class ProductsComponents {
     return await test.step(`Get info of product № ${position}`, async () => {
       const name = await this.getProductName(position);
       const price = await this.getProductPrice(position);
-      return {name: name, price: price};
-    })
+      return { name: name, price: price };
+    });
   }
 
   /**
@@ -80,9 +80,8 @@ export class ProductsComponents {
    * @returns {Promise<number>}
    */
   async getProductsCount() {
-    return await test.step(`Get products count`, async () => {
+    return await test.step('Get products count', async () => {
       return await this.products.count();
-    })
+    });
   }
-
 }

@@ -1,12 +1,12 @@
-import {getRandomEmail} from "../helpers/test.helper.js";
-import {test} from "@playwright/test";
+import { getRandomEmail } from '../helpers/test.helper.js';
+import { test } from '@playwright/test';
 
 export class FooterComponents {
   constructor(page) {
-    this.emailInput = page.locator(`#susbscribe_email`);
-    this.subscribeButton = page.locator(`#subscribe`);
-    this.subscribeTextLocator = page.locator(`.alert-success alert`);
-    this.subscribeText = `You have been successfully subscribed!`
+    this.emailInput = page.locator('#susbscribe_email');
+    this.subscribeButton = page.locator('#subscribe');
+    this.subscribeTextLocator = page.locator('.alert-success alert');
+    this.subscribeText = 'You have been successfully subscribed!';
   }
 
   /**
@@ -18,6 +18,6 @@ export class FooterComponents {
       const email = getRandomEmail();
       await this.emailInput.fill(email);
       await this.subscribeButton.click();
-    })
+    });
   }
 }

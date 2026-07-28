@@ -1,6 +1,6 @@
-import {HeaderComponents} from "../components/header.components.js";
-import {FooterComponents} from "../components/footer.components.js";
-import {test} from "@playwright/test";
+import { HeaderComponents } from '../components/header.components.js';
+import { FooterComponents } from '../components/footer.components.js';
+import { test } from '@playwright/test';
 
 export class BasePage {
   constructor(page) {
@@ -8,7 +8,7 @@ export class BasePage {
     this.header = new HeaderComponents(page);
     this.footer = new FooterComponents(page);
 
-    this.scrollUpButton = page.locator(`#scrollUp`);
+    this.scrollUpButton = page.locator('#scrollUp');
   }
 
   /**
@@ -16,9 +16,9 @@ export class BasePage {
    * @returns {Promise<void>}
    */
   async open() {
-    await test.step(`Go to Main Page`, async () => {
+    await test.step('Go to Main Page', async () => {
       await this.page.goto('');
-    })
+    });
   }
 
   /**
@@ -26,10 +26,10 @@ export class BasePage {
    * @returns {Promise<*>}
    */
   async getTitle() {
-    return await test.step(`Get tittle of page`, async () => {
-      await this.page.waitForLoadState('networkidle');
+    return await test.step('Get tittle of page', async () => {
+      await this.page.waitForLoadState({ state: 'networkidle' });
       return await this.page.title();
-    })
+    });
   }
 
   /**
@@ -37,9 +37,9 @@ export class BasePage {
    * @returns {Promise<void>}
    */
   async scrollUp() {
-    await test.step(`Scroll page up`, async () => {
+    await test.step('Scroll page up', async () => {
       await this.scrollUpButton.click();
-    })
+    });
   }
 
   /**
@@ -47,6 +47,6 @@ export class BasePage {
    * @returns {Promise<void>}
    */
   async waitLoad() {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState({ state: 'networkidle' });
   }
 }

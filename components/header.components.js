@@ -1,24 +1,23 @@
-import {test} from "@playwright/test";
+import { test } from '@playwright/test';
 
 export class HeaderComponents {
   constructor(page) {
     this.page = page;
 
-    this.homePage = page.getByRole('link', {name: ' Home'});
-    this.products = page.getByRole('link', {name: ' Products'});
-    this.cart = page.getByRole('link', {name: ' Cart'});
-    this.login = page.getByRole('link', {name: ' Signup / Login'});
-    this.contact = page.getByRole('link', {name: ' Contact us'});
-    this.testCases = page.getByRole('link', {name: ' Test Cases'});
-    this.apiTesting = page.getByRole('link', {name: ' API Testing'});
-    this.videoTutorials = page.getByRole('link', {name: ' Video Tutorials'});
+    this.homePage = page.getByRole('link', { name: ' Home' });
+    this.products = page.getByRole('link', { name: ' Products' });
+    this.cart = page.getByRole('link', { name: ' Cart' });
+    this.login = page.getByRole('link', { name: ' Signup / Login' });
+    this.contact = page.getByRole('link', { name: ' Contact us' });
+    this.testCases = page.getByRole('link', { name: ' Test Cases' });
+    this.apiTesting = page.getByRole('link', { name: ' API Testing' });
+    this.videoTutorials = page.getByRole('link', { name: ' Video Tutorials' });
 
     /** @type {import('@playwright/test').Locator} */
-    this.logo = page.getByAltText('Website for automation practice')
+    this.logo = page.getByAltText('Website for automation practice');
 
-    this.deleteAccountButton = page.getByRole('link', {name: ' Delete Account'});
-    this.logoutButton = page.getByRole('link', {name: ' Logout'});
-
+    this.deleteAccountButton = page.getByRole('link', { name: ' Delete Account' });
+    this.logoutButton = page.getByRole('link', { name: ' Logout' });
   }
 
   /**
@@ -27,7 +26,7 @@ export class HeaderComponents {
   async logout() {
     await test.step('Logout user', async () => {
       await this.logoutButton.click();
-    })
+    });
   }
 
   /**
@@ -36,7 +35,7 @@ export class HeaderComponents {
   async goToProducts() {
     await test.step('Navigate to Product Page', async () => {
       await this.products.click();
-    })
+    });
   }
 
   /**
@@ -45,7 +44,7 @@ export class HeaderComponents {
   async goToCart() {
     await test.step('Navigate to Cart Page', async () => {
       await this.cart.click();
-    })
+    });
   }
 
   /**
@@ -54,7 +53,7 @@ export class HeaderComponents {
   async goToLogin() {
     await test.step('Navigate to Login / Sign Up Page', async () => {
       await this.login.click();
-    })
+    });
   }
 
   /**
@@ -63,7 +62,7 @@ export class HeaderComponents {
   async goToContactUs() {
     await test.step('Navigate to Contact Us Page', async () => {
       await this.contact.click();
-    })
+    });
   }
 
   /**
@@ -86,6 +85,6 @@ export class HeaderComponents {
   async goToVideoTutorials() {
     await test.step('Navigate to Video Tutorials Page', async () => {
       await this.videoTutorials.click();
-    })
+    });
   }
 }

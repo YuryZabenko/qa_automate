@@ -1,11 +1,11 @@
-import {CartPage} from "../pages/cart.page.js";
-import {test} from "@playwright/test";
+import { CartPage } from '../pages/cart.page.js';
+import { test } from '@playwright/test';
 
 export class ModalComponents {
   constructor(page) {
     this.page = page;
-    this.viewCartButton = page.getByRole('link', {name: 'View Cart'});
-    this.continueShoppingButton = page.getByRole('button', {name: 'Continue Shopping'});
+    this.viewCartButton = page.getByRole('link', { name: 'View Cart' });
+    this.continueShoppingButton = page.getByRole('button', { name: 'Continue Shopping' });
   }
 
   /**
@@ -15,7 +15,7 @@ export class ModalComponents {
   async continueShopping() {
     await test.step('Click continue shopping in modal', async () => {
       await this.continueShoppingButton.click();
-    })
+    });
   }
 
   /**
@@ -26,6 +26,6 @@ export class ModalComponents {
     return await test.step('Click view Cart in modal', async () => {
       await this.viewCartButton.click();
       return new CartPage(this.page);
-    })
+    });
   }
 }

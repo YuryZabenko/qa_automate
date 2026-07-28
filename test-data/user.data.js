@@ -1,4 +1,4 @@
-import {getRandomEmail, getRandomString} from "../helpers/test.helper.js";
+import { getRandomEmail, getRandomString } from '../helpers/test.helper.js';
 
 export class UserData {
   /**
@@ -18,8 +18,8 @@ export class UserData {
       state: getRandomString(6, 'string'),
       city: getRandomString(6, 'string'),
       zipcode: getRandomString(6, 'number'),
-      mobileNumber: getRandomString(11, 'string')
-    }
+      mobileNumber: getRandomString(11, 'string'),
+    };
   }
 
   /**
@@ -30,8 +30,8 @@ export class UserData {
     return {
       email: 'ivan@ivanov.by',
       password: 'Ivanov',
-      name: 'Ivan'
-    }
+      name: 'Ivan',
+    };
   }
 
   /**
@@ -42,8 +42,8 @@ export class UserData {
     return {
       email: getRandomEmail(),
       password: getRandomString(10, 'all'),
-      name: getRandomString(10, 'string')
-    }
+      name: getRandomString(10, 'string'),
+    };
   }
 
   /**
@@ -55,7 +55,7 @@ export class UserData {
       email: getRandomEmail(),
       name: getRandomString(10, 'string'),
       subject: getRandomString(10, 'string'),
-      message: getRandomString(100, 'string')
-    }
+      message: getRandomString(100, 'string'),
+    };
   }
 }

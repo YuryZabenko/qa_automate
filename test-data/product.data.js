@@ -5,10 +5,10 @@ export class ProductData {
    */
   static getQuantityDataPositive() {
     return [
-      {position: 1, quantity: 5},
-      {position: 2, quantity: 1},
-      {position: 3, quantity: 99}
-    ]
+      { position: 1, quantity: 5 },
+      { position: 2, quantity: 1 },
+      { position: 3, quantity: 99 },
+    ];
   }
 
   /**
@@ -17,10 +17,10 @@ export class ProductData {
    */
   static getQuantityDataNegative() {
     return [
-      {position: 1, quantity: -5},
-      {position: 2, quantity: 0},
-      {position: 3, quantity: 99999999999999999},
-      {position: 1, quantity: 'dsg'}
-    ]
+      { position: 1, quantity: -5 },
+      { position: 2, quantity: 0 },
+      { position: 3, quantity: 9999999999999 },
+      { position: 1, quantity: 'dsg' },
+    ];
   }
 }
