@@ -34,6 +34,7 @@ test.describe('Positive products tests', () => {
     productsToCart.push(await productPage.products.getProductInfo(2));
     await productPage.products.addToCart(2);
     const cartPage = await productPage.modal.viewCart();
+    await productPage.waitLoad();
 
     const productsInCart = await cartPage.getAllCartProducts();
     expect(productsToCart).toEqual(productsInCart);

@@ -91,6 +91,7 @@ export class ProductCardComponents {
   async addToCart() {
     await test.step('Add product to cart', async () => {
       await this.addButton.click();
+      await this.page.waitForLoadState('networkidle');
     });
   }
 }
