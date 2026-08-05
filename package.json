@@ -13,17 +13,14 @@
     "test:smoke:headed": "npx playwright test --grep @smoke --headed",
     "test:regression:headed": "npx playwright test --grep @regression --headed",
     "test:ci": "CI=true npx playwright test",
-
     "allure:clear": "rimraf allure-results allure-report",
     "allure:generate": "npx allure generate allure-results -o allure-report --clean",
     "allure:open": "px allure open allure-report",
     "posttest": "npm run allure:generate && npm run allure:open",
-
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check ."
-
   },
   "repository": {
     "type": "git",

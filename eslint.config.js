@@ -33,17 +33,20 @@ export default [
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
       indent: ['error', 2],
-      'comma-dangle': 'off',  // ✅ Prettier управляет
+      'comma-dangle': 'off', // ✅ Prettier управляет
 
       // ✅ Лучшие практики
-      'no-unused-vars': ['warn', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      }],
+      'no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       'no-console': 'warn',
-      'eqeqeq': ['error', 'always'],
-      'curly': ['error', 'all'],
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
       'no-var': 'error',
       'prefer-const': 'error',
 
@@ -65,7 +68,7 @@ export default [
       'playwright/no-page-pause': 'warn',
       'playwright/expect-expect': 'warn',
       'playwright/no-skipped-test': 'off',
-      'playwright/no-focused-test': 'error',  // .only - ошибка
+      'playwright/no-focused-test': 'error', // .only - ошибка
     },
   },
 ];

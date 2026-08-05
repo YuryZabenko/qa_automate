@@ -2,12 +2,12 @@ name: Smoke Tests
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'tests/**/*.spec.js'
       - 'playwright.config.ts'
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'tests/smoke/**'
       - 'playwright.config.ts'

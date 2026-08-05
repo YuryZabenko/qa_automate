@@ -1,7 +1,10 @@
 <<<<<<< Updated upstream
+
 # qa_automate
+
 Work
 =======
+
 > **Project:** Automation Exercise
 > **Project:** http://automationexercise.com
 > **Framework:** Playwright
@@ -53,4 +56,5 @@ Work
 | `registration.spec.js` | TC-001, TC-002, TC-003, TC-004         | Тесты регистрации и логина |
 | `contact.spec.js`      | TC-005                                 | Тесты формы контактов      |
 | `product.spec.js`      | TC-006, TC-007, TC-008, TC-009, TC-010 | Тесты продуктов и корзины  |
->>>>>>> Stashed changes
+
+> > > > > > > Stashed changes

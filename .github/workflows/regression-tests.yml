@@ -2,12 +2,12 @@ name: Full Regression Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'tests/**/*.spec.js'
       - 'playwright.config.ts'
   schedule:
-    - cron: '0 3 * * *'  # Daily at 3:00 AM
+    - cron: '0 3 * * *' # Daily at 3:00 AM
 
   workflow_dispatch:
     inputs:

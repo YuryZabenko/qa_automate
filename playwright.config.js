@@ -25,7 +25,6 @@ export default defineConfig({
     ['list'],
   ],
 
-
   use: {
     baseURL: process.env.BASE_URL,
     headless: true,
@@ -67,5 +66,4 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-
 });

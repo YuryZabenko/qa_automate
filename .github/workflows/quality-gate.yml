@@ -2,7 +2,7 @@ name: Quality Gate
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'tests/**/*.spec.js'
       - 'playwright.config.ts'
@@ -11,7 +11,7 @@ on:
       - 'eslint.config.js'
       - '.prettierrc.js'
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'tests/**/*.spec.js'
       - 'playwright.config.ts'
