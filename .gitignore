@@ -1,0 +1,15 @@
+.idea
+allure-report
+allure-results
+.env
+.env.*
+!.env.example
+test-files/downloads/
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

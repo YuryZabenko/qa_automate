@@ -1,0 +1,125 @@
+name: Smoke Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'tests/**/*.spec.js'
+      - 'playwright.config.ts'
+  push:
+    branches: [ main ]
+    paths:
+      - 'tests/smoke/**'
+      - 'playwright.config.ts'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  CI: true
+  BASE_URL: ${{ secrets.BASE_URL }}
+
+jobs:
+  smoke-tests:
+    name: Run Smoke Tests (@smoke) - ${{ matrix.browser }}
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run smoke tests
+        run: npx playwright test --grep @smoke --project=${{ matrix.browser }}
+        env:
+          ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-results-${{ matrix.browser }}
+          path: |
+            test-results/
+            playwright-report/
+            allure-results/
+          retention-days: 30
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-screenshots-${{ matrix.browser }}
+          path: test-results/**/*.png
+          retention-days: 14
+
+      - name: Upload videos on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-videos-${{ matrix.browser }}
+          path: test-results/**/*.webm
+          retention-days: 14
+
+      - name: Upload traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-traces-${{ matrix.browser }}
+          path: test-results/**/trace.zip
+          retention-days: 14
+
+  merge-reports:
+    name: Merge Smoke Reports
+    if: always()
+    needs: [smoke-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: all-reports
+          pattern: smoke-test-results-*
+          merge-multiple: true
+
+      - name: Merge reports
+        run: npx playwright merge-reports --reporter=html ./all-reports
+
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-merged-report
+          path: playwright-report/
+          retention-days: 30
