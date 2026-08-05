@@ -26,6 +26,7 @@ on:
 env:
   CI: true
   API_BASE_URL: ${{ secrets.API_BASE_URL }}
+  BASE_URL: ${{ secrets.BASE_URL }}
 
 jobs:
   api-tests:

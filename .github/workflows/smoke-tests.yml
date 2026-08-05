@@ -63,6 +63,7 @@ jobs:
         run: npx playwright test --grep @smoke --project=${{ matrix.browser }}
         env:
           ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
           BASE_URL: ${{ secrets.BASE_URL }}
 
       - name: Upload test results

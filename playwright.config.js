@@ -26,7 +26,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.API_BASE_URL || process.env.BASE_URL,
     headless: true,
 
     trace: 'retain-on-failure',
