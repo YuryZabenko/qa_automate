@@ -125,17 +125,17 @@ jobs:
         run: |
           echo "Original structure:"
           ls -la all-reports/
-          
+
           mkdir -p reports-files
-          
+
           echo "Searching for report files..."
           find all-reports -type f -name "*.json" -exec cp {} reports-files/ \; 2>/dev/null || echo "No JSON files found"
-          
+
           if [ -d "all-reports/playwright-report" ]; then
             echo "Found playwright-report folder"
             cp -r all-reports/playwright-report/* reports-files/ 2>/dev/null || true
           fi
-          
+
           echo "Extracted files:"
           ls -la reports-files/
 
@@ -151,13 +151,13 @@ jobs:
             echo "<html><head><title>Smoke Test Results</title></head><body>" > playwright-report/index.html
             echo "<h1>Smoke Test Results</h1>" >> playwright-report/index.html
             echo "<ul>" >> playwright-report/index.html
-          
+
             for browser in chromium firefox webkit; do
               if [ -d "all-reports/playwright-report" ]; then
                 echo "<li><a href='$browser/index.html'>$browser report</a></li>" >> playwright-report/index.html
               fi
             done
-          
+
             echo "</ul>" >> playwright-report/index.html
             echo "</body></html>" >> playwright-report/index.html
           fi
