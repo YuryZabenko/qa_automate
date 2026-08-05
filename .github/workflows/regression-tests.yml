@@ -8,7 +8,6 @@ on:
       - 'playwright.config.ts'
   schedule:
     - cron: '0 3 * * *' # Daily at 3:00 AM
-
   workflow_dispatch:
     inputs:
       environment:
@@ -35,7 +34,7 @@ env:
 
 jobs:
   regression-tests:
-    name: Run Regression - ${{ matrix.browser }}
+    name: Run Regression - ${{ matrix.browser }} (shard ${{ matrix.shard }})
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -85,15 +84,20 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
 
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-report-${{ matrix.browser }}-${{ matrix.shard }}
+          path: playwright-report/
+          retention-days: 30
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: regression-results-${{ matrix.browser }}-${{ matrix.shard }}
-          path: |
-            test-results/
-            playwright-report/
-            allure-results/
+          name: regression-test-results-${{ matrix.browser }}-${{ matrix.shard }}
+          path: test-results/
           retention-days: 30
 
       - name: Upload screenshots on failure
@@ -119,27 +123,3 @@ jobs:
           name: regression-traces-${{ matrix.browser }}-${{ matrix.shard }}
           path: test-results/**/trace.zip
           retention-days: 14
-
-  merge-reports:
-    name: Merge Regression Reports
-    if: always()
-    needs: [regression-tests]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v4
-        with:
-          path: all-reports
-          pattern: regression-results-*
-          merge-multiple: true
-
-      - name: Merge reports
-        run: npx playwright merge-reports --reporter=html ./all-reports
-
-      - name: Upload merged report
-        uses: actions/upload-artifact@v4
-        with:
-          name: regression-merged-report
-          path: playwright-report/
-          retention-days: 30
