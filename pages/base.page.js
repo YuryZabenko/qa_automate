@@ -27,7 +27,8 @@ export class BasePage {
    */
   async clickElement(element, elementName) {
     await test.step(`Click on element: ${elementName}`, async () => {
-      await element.waitFor({ state: 'visible', timeout: 10000 });
+      await this.waitLoad();
+      await element.waitFor({ state: 'visible', timeout: 15000 });
       await element.click();
     });
   }

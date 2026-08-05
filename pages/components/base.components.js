@@ -12,8 +12,9 @@ export class BaseComponents {
    * @returns {Promise<void>}
    */
   async clickElement(element, elementName) {
-    await test.step(`Клик по элементу: ${elementName}`, async () => {
-      await element.waitFor({ state: 'visible', timeout: 10000 });
+    await test.step(`Click on element: ${elementName}`, async () => {
+      await this.waitLoad();
+      await element.waitFor({ state: 'visible', timeout: 15000 });
       await element.click();
     });
   }
