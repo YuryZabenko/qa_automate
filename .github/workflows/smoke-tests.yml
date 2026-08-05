@@ -101,24 +101,70 @@ jobs:
           path: test-results/**/trace.zip
           retention-days: 14
 
+  # объединение отчетов
   merge-reports:
     name: Merge Smoke Reports
     if: always()
     needs: [smoke-tests]
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Скачиваем все артефакты
+      - name: Download all reports
+        uses: actions/download-artifact@v4
         with:
           path: all-reports
           pattern: smoke-test-results-*
           merge-multiple: true
 
-      - name: Merge reports
-        run: npx playwright merge-reports --reporter=html ./all-reports
+      # Извлекаем файлы отчетов из папок
+      - name: Extract report files
+        run: |
+          echo "Original structure:"
+          ls -la all-reports/
+          
+          mkdir -p reports-files
+          
+          echo "Searching for report files..."
+          find all-reports -type f -name "*.json" -exec cp {} reports-files/ \; 2>/dev/null || echo "No JSON files found"
+          
+          if [ -d "all-reports/playwright-report" ]; then
+            echo "Found playwright-report folder"
+            cp -r all-reports/playwright-report/* reports-files/ 2>/dev/null || true
+          fi
+          
+          echo "Extracted files:"
+          ls -la reports-files/
 
+      # Объединяем отчеты
+      - name: Merge reports
+        run: |
+          if [ -n "$(find reports-files -type f -name '*.json' | head -1)" ]; then
+            echo "Found JSON reports, merging..."
+            npx playwright merge-reports --reporter=html ./reports-files
+          else
+            echo "⚠️ No JSON reports found, creating summary report from HTML files"
+            mkdir -p playwright-report
+            echo "<html><head><title>Smoke Test Results</title></head><body>" > playwright-report/index.html
+            echo "<h1>Smoke Test Results</h1>" >> playwright-report/index.html
+            echo "<ul>" >> playwright-report/index.html
+          
+            for browser in chromium firefox webkit; do
+              if [ -d "all-reports/playwright-report" ]; then
+                echo "<li><a href='$browser/index.html'>$browser report</a></li>" >> playwright-report/index.html
+              fi
+            done
+          
+            echo "</ul>" >> playwright-report/index.html
+            echo "</body></html>" >> playwright-report/index.html
+          fi
+
+      # Сохраняем объединенный отчет
       - name: Upload merged report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: smoke-merged-report
