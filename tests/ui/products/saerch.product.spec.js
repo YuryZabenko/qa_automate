@@ -6,7 +6,6 @@ test.describe('Search product tests', () => {
     const products = ProductData.getProductsToSearch();
 
     products.forEach((product) => {
-
       // test fail on top and dress products. todo delete 'testFunction - test.fail' after fix BUG on site
       const knownBugs = ['top', 'dress'];
       const testFunction = knownBugs.includes(product) ? test.fail : test;
