@@ -2,7 +2,7 @@ name: Full Regression Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, finalWork]
     paths:
       - 'tests/**/*.spec.js'
       - 'playwright.config.ts'
@@ -33,6 +33,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: finalWork
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -56,8 +58,8 @@ jobs:
         run: npx playwright test --grep @regression --project=chromium
         env:
           ENVIRONMENT: ${{ github.event.inputs.environment || 'staging' }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          BASE_URL: ${{ env.BASE_URL }}
+          API_BASE_URL: ${{ env.API_BASE_URL }}
 
       - name: Upload HTML report
         if: always()
