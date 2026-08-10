@@ -1,0 +1,52 @@
+{
+  "name": "qa_automate",
+  "version": "1.0.0",
+  "description": "Work",
+  "main": "main.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:api": "npx playwright test --grep @api",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test --grep @regression",
+    "test:headed": "npx playwright test --headed",
+    "test:api:headed": "npx playwright test --grep @api --headed",
+    "test:smoke:headed": "npx playwright test --grep @smoke --headed",
+    "test:regression:headed": "npx playwright test --grep @regression --headed",
+    "test:ci": "CI=true npx playwright test",
+    "allure:clear": "rimraf allure-results allure-report",
+    "allure:generate": "npx allure generate allure-results -o allure-report --clean",
+    "allure:open": "px allure open allure-report",
+    "posttest": "npm run allure:generate && npm run allure:open",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuryZabenko/qa_automate.git"
+  },
+  "keywords": [],
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/YuryZabenko/qa_automate/issues"
+  },
+  "homepage": "https://github.com/YuryZabenko/qa_automate#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
+    "ajv": "^8.20.0",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.11.0",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.8.0",
+    "prettier": "^3.9.6"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
